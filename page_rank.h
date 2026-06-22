@@ -1,0 +1,1 @@
+// Recebe o grafo de adjacência (quem aponta pra quem) e calcula o Page Rank.
