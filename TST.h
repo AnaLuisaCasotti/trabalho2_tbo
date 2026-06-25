@@ -2,14 +2,10 @@
 #define TST_H
 
 #include "lista_docs.h"
+#include <stdbool.h>
 
 // OBS: passar structs para o .c depois para a estrutura ficar opaca.
 
-typedef struct TSTNode {
-    struct TSTNode *esq;
-    struct TSTNode *meio;
-    struct TSTNode *dir;
-    DocList *docs;
-} TSTNode;
+typedef struct tst TST;
 
 #endif
