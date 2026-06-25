@@ -1,7 +1,5 @@
 #include "TST.h"
 
-// OBS: passar structs para o .c depois para a estrutura ficar opaca.
-
 struct tst
 {
     unsigned char c;
