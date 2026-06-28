@@ -1,0 +1,45 @@
+# Arquivos compilados
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+
+# Executáveis comuns
+main
+programa
+app
+
+# Pastas de build
+build/
+bin/
+obj/
+debug/
+release/
+
+# Arquivos temporários
+*.tmp
+*.log
+*.bak
+*.swp
+*~
+
+# Arquivos do VS Code
+.vscode/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos gerados por Make/CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile.in
+
+# Arquivos de teste/saída, se você gerar
+output/
+saida/

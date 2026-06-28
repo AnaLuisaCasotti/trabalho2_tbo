@@ -3,7 +3,6 @@
 struct tst
 {
     unsigned char c;
-    bool final; // 1 se for o último caracter da palavra, 0 caso contrário
     TST *esq;
     TST *meio;
     TST *dir;
@@ -18,10 +17,10 @@ static TST *create_node()
     nova->meio = NULL;
     nova->dir = NULL;
     nova->docs = NULL;
-    // nova->final = false; nao eh necessario, pode-se verificar se o no eh um "fim" pelo docklist
 
     return nova;
 }
+
 // key = "ana\0"           (na primeira chamada)
 // key' = key + 1 = "na\0" (na segunda chamada)
 // key'' = key + 1 = "a\0" (na terceira chamada)
@@ -32,41 +31,51 @@ TST *cria_tst()
     return NULL;
 }
 
-// MODIFICAR PARA O CASO DE TENTAR INSERIR UMA PALAVRA QUE JA ESTA NA TST
-// NESTE CASO, MODIFICAR A DOCKLIST DESTA ARVORE, VALUE EH O DOCUMENTO ATUAL DE ORIGEM DESSA PALAVRA
-static TST *rec_insert(TST *t, char *key)
+static TST *rec_insert(TST *t, char *key, int doc_id)
 {
     unsigned char c = *key; // se key = "ana\0" -> *key = 'a' (primeiro caracter)
 
+    // caso tenha encontrado um noh nulo, faz-se um novo noh e o processo de insercao continua
     if (t == NULL)
     {
         t = create_node();
         t->c = c;
     }
 
+    // caso o caracter a ser inserido seja menor do que o caracter do noh atual, continua a insersao no noh filho a esquerda
     if (c < t->c)
     {
-        t->esq = rec_insert(t->esq, key);
+        t->esq = rec_insert(t->esq, key, doc_id);
     }
 
+    // caso o caracter a ser inserido seja maior do que o caracter do noh atual, continua a insersao no noh filho a direita
     else if (c > t->c)
     {
-        t->dir = rec_insert(t->dir, key);
+        t->dir = rec_insert(t->dir, key, doc_id);
     }
 
+    // se o proximo caracter da string for diferente de '\0' continua recursivamente para o noh filho do meio
     else if (*(key + 1) != '\0')
     {
-        t->meio = rec_insert(t->meio, key + 1);
+        t->meio = rec_insert(t->meio, key + 1, doc_id);
     }
     else
-        t->docs = cria_doclist();
+    {
+        /*se a lista de documentos nesse noh for nula, significa que essa palavra
+        nao fazia parte da tst ainda, apenas adiciona-se o doc_id na lista de documentos
+         ja existente */
+        if (t->docs == NULL)
+            t->docs = cria_doclist();
+
+        insere_doclist(t->docs, doc_id);
+    }
 
     return t;
 }
 
-TST *TST_insert(TST *t, char *key)
+TST *TST_insert(TST *t, char *key, int doc_id)
 {
-    return rec_insert(t, key);
+    return rec_insert(t, key, doc_id);
 }
 
 static TST *rec_search(TST *t, char *key)

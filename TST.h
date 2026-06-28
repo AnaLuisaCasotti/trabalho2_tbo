@@ -16,9 +16,10 @@ TST *cria_tst();
  * @brief insere um chave (string/palavra) na tst
  * @param t trie a ser modificada
  * @param key string a ser adcionada na arvore
+ * @param doc_id id do documento de origem do parametro \b key
  * @return tst atualizada
  */
-TST *TST_insert(TST *t, char *key);
+TST *TST_insert(TST *t, char *key, int doc_id);
 
 /**
  * @brief busca uma string/palavra em uma tst
