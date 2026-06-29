@@ -4,10 +4,10 @@
 #define BETA 0.15
 #define EPS 0.000001
 
-static double calcula_E(int n, int *pr, int *antigo_pr){
+static double calcula_E(int n, double *pr, double *antigo_pr){
     double sum = 0.0;
     for(int i=0; i < n; i++){
-        sum += abs(pr[i] - antigo_pr[i]);
+        sum += fabs(pr[i] - antigo_pr[i]);
     }
     return sum / (double) n;
 }
