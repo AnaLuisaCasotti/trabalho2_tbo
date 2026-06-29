@@ -35,6 +35,9 @@ void insere_grafo(Graph *g, int i, int j);
  */
 int get_num_paginas_grafo(Graph *g);
 
+int *get_qtd_out(Graph *g);
+
+int tem_link_para_i(Graph *g, int i, int j);
 
 /**
  * @brief desaloca um grafo

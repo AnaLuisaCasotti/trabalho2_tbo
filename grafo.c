@@ -39,6 +39,17 @@ int get_num_paginas_grafo(Graph *g){
     return g->n;
 }
 
+int *get_qtd_out(Graph *g){
+    return g->qtd_out;
+}
+
+int tem_link_para_i(Graph *g, int i, int j){
+    for(GraphNode *ptr = g->out[j]; ptr != NULL; ptr = ptr->prox){
+        if(ptr->dest == i) return 1;
+    }
+    return 0;
+}
+
 void free_grafo(Graph *g){
 
     if (g == NULL) return;
