@@ -1,35 +1,38 @@
 #include "vetor_strings.h"
+#include "lista_docs.h"
 #include "grafo.h"
 #include "utils.h"
+#include "TST.h"
 
 int main(int argc, char *argv[])
 {
     char *nome_diretorio;
     VetorStr *docs; // vetor de strings com os nomes dos documentos
     Graph *grafo; // estrtura que guarda os links entre os documentos/páginas
+    TST *palavras_tst, *stopwords_tst;
 
     if (argc < 2){
         printf("Quantidade insuficiente de argumentos!\n");
         exit(1);
     }
 
-    FILE *graph, *index, *searches, *stopwords;
-
     nome_diretorio = argv[1];
 
-    index = abre_arquivo(nome_diretorio, "index.txt");
-    le_index(index, &docs); // preenche o vetor com o nome de cada documento/página
+    le_index(nome_diretorio, &docs); // preenche o vetor com o nome de cada documento/página
     ordena_vetor(docs);
 
-    imprime_vetor(docs); // TESTE
+    //imprime_vetor(docs); // TESTE
 
-    graph = abre_arquivo(nome_diretorio, "graph.txt");
-    le_graph(graph, &grafo, docs); // le graph.txt e cria a estrutura de links entre os documentos/páginas
+    le_graph(nome_diretorio, &grafo, docs); // le graph.txt e cria a estrutura de links entre os documentos/páginas
 
-    fclose(graph);
-    fclose(index);
+    le_stopwords(nome_diretorio, &stopwords_tst); // le stopwords.h e cria uma tst para as stopwords
+
+    le_diretorio_pages(docs, &palavras_tst, stopwords_tst);
+
     free_vetor(docs);
     free_grafo(grafo);
+    desaloca_tst(stopwords_tst);
+    desaloca_tst(palavras_tst);
     
     return 0;
 }

@@ -14,7 +14,7 @@ TST *cria_tst();
 
 /**
  * @brief insere um chave (string/palavra) na tst
- * @param t trie a ser modificada
+ * @param t tst a ser modificada
  * @param key string a ser adcionada na arvore
  * @param doc_id id do documento de origem do parametro \b key
  * @return tst atualizada

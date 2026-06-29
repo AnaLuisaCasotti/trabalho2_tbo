@@ -35,6 +35,10 @@ void insere_grafo(Graph *g, int i, int j){
     g->qtd_out[i]++;
 }
 
+int get_num_paginas_grafo(Graph *g){
+    return g->n;
+}
+
 void free_grafo(Graph *g){
 
     if (g == NULL) return;

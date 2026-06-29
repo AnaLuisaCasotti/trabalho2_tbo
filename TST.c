@@ -129,6 +129,7 @@ static TST *rec_desloca(TST *t)
     t->meio = rec_desloca(t->meio);
 
     free_doclist(t->docs);
+    free(t);
 
     return NULL;
 }
