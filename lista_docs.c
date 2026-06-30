@@ -63,20 +63,6 @@ void print_doclist(DocList *l){
     printf("\n");
 }
 
-void free_doclist(DocList *l){
-    if (l == NULL) return;
-
-    DocNode *atual = l->inicio;
-
-    while(atual != NULL){
-        DocNode *prox = atual->prox;
-        free(atual);
-        atual = prox;
-    }
-
-    free(l);
-}
-
 DocList *encontra_intersecao(DocList *l1, DocList *l2) {
     DocList *intersecao = cria_doclist();
     if (intersecao == NULL) return NULL;
@@ -176,4 +162,18 @@ void ordena_doclist(DocList *l, double *pr){
     l->fim = aux[tam - 1].no; 
 
     free(aux);
+}
+
+void free_doclist(DocList *l){
+    if (l == NULL) return;
+
+    DocNode *atual = l->inicio;
+
+    while(atual != NULL){
+        DocNode *prox = atual->prox;
+        free(atual);
+        atual = prox;
+    }
+
+    free(l);
 }

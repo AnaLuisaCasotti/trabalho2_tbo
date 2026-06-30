@@ -98,11 +98,12 @@ void le_pagina(FILE *page, char *page_name, VetorStr *docs, TST **palavras_tst, 
     }
 }
 
-void le_diretorio_pages(VetorStr *docs, TST **palavras_tst, TST *stopwords_tst){
+void le_diretorio_pages(char *nome_diretorio, VetorStr *docs, TST **palavras_tst, TST *stopwords_tst){
 
     *palavras_tst = cria_tst();
 
-    char *pasta = "exemplo/pages";
+    char pasta[MAX_PATH];
+    snprintf(pasta, sizeof(pasta), "%s/%s", nome_diretorio, "pages");
 
     DIR *diretorio = opendir(pasta);
 

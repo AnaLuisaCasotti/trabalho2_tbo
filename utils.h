@@ -21,6 +21,6 @@ void padronizar_string(char *string);
 
 void le_pagina(FILE *page, char *page_name, VetorStr *docs, TST **palavras_tst, TST *stopwords_tst);
 
-void le_diretorio_pages(VetorStr *docs, TST **palavras_tst, TST *stopwords_tst);
+void le_diretorio_pages(char *nome_diretorio, VetorStr *docs, TST **palavras_tst, TST *stopwords_tst);
 
 #endif

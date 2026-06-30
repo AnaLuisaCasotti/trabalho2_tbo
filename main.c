@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     le_stopwords(nome_diretorio, &stopwords_tst); // le stopwords.h e cria uma tst para as stopwords
 
-    le_diretorio_pages(docs, &palavras_tst, stopwords_tst);
+    le_diretorio_pages(nome_diretorio, docs, &palavras_tst, stopwords_tst);
 
     ler_consultas(nome_diretorio, docs, palavras_tst, stopwords_tst, grafo);
     
