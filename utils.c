@@ -92,7 +92,7 @@ void le_pagina(FILE *page, char *page_name, VetorStr *docs, TST **palavras_tst, 
         
         padronizar_string(palavra);
 
-        if (TST_search(stopwords_tst, palavra) == NULL) continue; // se é stopword, continua
+        if (TST_search(stopwords_tst, palavra) != NULL) continue; // se é stopword, continua
 
         *palavras_tst = TST_insert(*palavras_tst, palavra, find_index(docs, page_name, 0, get_tam_vetor(docs))); // se não, insere na tst (tabela de símbolos)
     }

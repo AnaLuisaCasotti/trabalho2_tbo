@@ -1,5 +1,6 @@
 #include "page_rank.h"
 #include <stdlib.h>
+#include <math.h>
 #define ALFA 0.85
 #define BETA 0.15
 #define EPS 0.000001

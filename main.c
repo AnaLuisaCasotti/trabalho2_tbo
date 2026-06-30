@@ -3,6 +3,7 @@
 #include "grafo.h"
 #include "utils.h"
 #include "TST.h"
+#include "consulta.h"
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +30,8 @@ int main(int argc, char *argv[])
 
     le_diretorio_pages(docs, &palavras_tst, stopwords_tst);
 
+    ler_consultas(docs, palavras_tst, stopwords_tst, grafo);
+    
     free_vetor(docs);
     free_grafo(grafo);
     desaloca_tst(stopwords_tst);
