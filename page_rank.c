@@ -55,5 +55,12 @@ double *calcula_pagerank(Graph *grafo){
         k++;
     }
 
+    free(antigo_pr);
+
+    // arredonda os valores para 17 casas decimais
+    for (int i = 0; i < num_paginas; i++){
+        pr[i] = round(pr[i] * 1e17) / 1e17;
+    }
+
     return pr;
 }

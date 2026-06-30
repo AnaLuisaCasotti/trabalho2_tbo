@@ -1,28 +1,43 @@
 #include  "consulta.h"
 
-void ler_consultas(VetorStr *docs, TST *palavras_tst, TST *stopwords_tst, Graph *grafo){
+void ler_consultas(char *nome_diretorio, VetorStr *docs, TST *palavras_tst, TST *stopwords_tst, Graph *grafo){
 
   double *pagerank = calcula_pagerank(grafo);
   
   char consulta[100];
+
+  FILE *searches = abre_arquivo(nome_diretorio, "searches.txt");
   
-  while(scanf("%[^\n]\n", consulta) != EOF){
+  while(fscanf(searches, "%[^\n]\n", consulta) != EOF){
     
     padronizar_string(consulta);
 
     printf("search:%s\n",consulta);
+    
     DocList *resultado = fazer_consulta(consulta, palavras_tst, stopwords_tst);
+    
     if(resultado != NULL && get_tamanho_doclist(resultado) != 0){
-    ordena_doclist(resultado, pagerank);
+      ordena_doclist(resultado, pagerank);
     }
+
     printf("pages:");
+
     if(resultado != NULL && get_tamanho_doclist(resultado) != 0) print_com_nomes(resultado, docs);
+    
     printf("\n");
     printf("pr:");
-    if(resultado!=NULL && get_tamanho_doclist(resultado) != 0) print_com_pr(resultado, pagerank);
+    
+    if(resultado!= NULL && get_tamanho_doclist(resultado) != 0) print_com_pr(resultado, pagerank);
+    
     printf("\n");
+    
     if (resultado != NULL) free_doclist(resultado);
   }
+
+  printf("\n");
+
+  free(pagerank);
+  fclose(searches);
 }
 
 DocList* fazer_consulta(char* consulta, TST *palavras_tst, TST *stopwords_tst){

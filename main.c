@@ -22,15 +22,13 @@ int main(int argc, char *argv[])
     le_index(nome_diretorio, &docs); // preenche o vetor com o nome de cada documento/página
     ordena_vetor(docs);
 
-    //imprime_vetor(docs); // TESTE
-
     le_graph(nome_diretorio, &grafo, docs); // le graph.txt e cria a estrutura de links entre os documentos/páginas
 
     le_stopwords(nome_diretorio, &stopwords_tst); // le stopwords.h e cria uma tst para as stopwords
 
     le_diretorio_pages(docs, &palavras_tst, stopwords_tst);
 
-    ler_consultas(docs, palavras_tst, stopwords_tst, grafo);
+    ler_consultas(nome_diretorio, docs, palavras_tst, stopwords_tst, grafo);
     
     free_vetor(docs);
     free_grafo(grafo);

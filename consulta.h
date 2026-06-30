@@ -11,7 +11,7 @@
 #include "lista_docs.h"
 #include "utils.h"
 
-void ler_consultas(VetorStr *docs, TST *palavras_tst, TST *stopwords_tst, Graph *grafo);
+void ler_consultas(char *nome_diretorio, VetorStr *docs, TST *palavras_tst, TST *stopwords_tst, Graph *grafo);
 
 DocList* fazer_consulta(char* consulta, TST *palavras_tst, TST *stopwords_tst);
 

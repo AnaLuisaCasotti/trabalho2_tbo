@@ -130,7 +130,7 @@ void print_com_nomes(DocList *l, VetorStr *docs){
 void print_com_pr(DocList *l, double *pr){
     DocNode *atual = l->inicio;
     while(atual != NULL){
-      printf("%.17g", pr[atual->doc_id]);
+      printf("%.17lf", pr[atual->doc_id]);
       if(atual->prox != NULL) printf(" ");
       atual = atual->prox;
     }
