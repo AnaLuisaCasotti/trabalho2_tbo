@@ -67,7 +67,9 @@ int tem_link_para_i(Graph *g, int i, int j){
 }
 
 double sum_page_rank(Graph *g, int i, double *antigo_pr){
+    
     double sum = 0.0;
+
     for(GraphNode *ptr = g->in[i]; ptr != NULL; ptr = ptr->prox){
         int j = ptr->indx;
         sum += antigo_pr[j] / (double) g->qtd_out[j];

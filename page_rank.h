@@ -12,7 +12,7 @@
 /**
  * @brief calcula o pagerank de todas as páginas
  * @param grafo o grafo
- * @return vetor com os pageranks. vetor[i] guarda o pagerank da página i
+ * @return vetor com os pageranks. vetor[i] guarda o pagerank da página com id = i
  */
 double *calcula_pagerank(Graph *grafo);
 

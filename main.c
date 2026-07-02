@@ -20,11 +20,11 @@ int main(int argc, char *argv[])
     nome_diretorio = argv[1];
 
     le_index(nome_diretorio, &docs); // preenche o vetor com o nome de cada documento/página
-    ordena_vetor(docs);
+    ordena_vetor(docs); // o vetor com os nomes dos docs fica ordenado em ordem crescente dos nomes
 
     le_graph(nome_diretorio, &grafo, docs); // le graph.txt e cria a estrutura de links entre os documentos/páginas
 
-    le_stopwords(nome_diretorio, &stopwords_tst); // le stopwords.h e cria uma tst para as stopwords
+    le_stopwords(nome_diretorio, &stopwords_tst); // le stopwords.txt e cria uma tst para as stopwords
 
     le_diretorio_pages(nome_diretorio, docs, &palavras_tst, stopwords_tst);
 

@@ -6,7 +6,14 @@ FILE *abre_arquivo(char *nome_diretorio, char *nome_arquivo){
 
     snprintf(caminho, sizeof(caminho), "%s/%s", nome_diretorio, nome_arquivo);
 
-    return fopen(caminho, "r");
+    FILE *arquivo = fopen(caminho, "r");
+
+    if (arquivo == NULL) {
+        perror("fopen");
+        return NULL;
+    }
+
+    return arquivo;
 }
 
 void le_index(char *nome_diretorio, VetorStr **docs){
@@ -23,7 +30,7 @@ void le_index(char *nome_diretorio, VetorStr **docs){
     fclose(index);
 }
 
-// essa função usa muitos loops e buscas em vetor. Deve influenciar na eficiência
+// essa função usa muitos loops e buscas em vetor. Pode influenciar na eficiência
 void le_graph(char *nome_diretorio, Graph **grafo, VetorStr *docs){
 
     FILE *graph = abre_arquivo(nome_diretorio, "graph.txt");
@@ -33,28 +40,21 @@ void le_graph(char *nome_diretorio, Graph **grafo, VetorStr *docs){
     *grafo = cria_grafo(get_tam_vetor(docs));
 
     while(fscanf(graph, "%s%*c", doc_fonte) != EOF){
-        //printf("doc fonte: %s, ", doc_fonte); // TESTE
 
         int indx_doc_fonte = find_index(docs, doc_fonte, 0, get_tam_vetor(docs)); // busca o índice do documento lido
         int qtd_links = 0;
 
-        //printf("indx: %d, ", indx_doc_fonte); // TESTE
 
         fscanf(graph, "%d%*c", &qtd_links);
-        //printf("qtd links: %d\n", qtd_links); // TESTE
 
-        //printf("docs dest:\n"); // TESTE
         for (int i = 0; i < qtd_links; i++){
+
             fscanf(graph, "%s%*c", doc_dest);
-            //printf("%s\n", doc_dest); // TESTE
 
             int indx_doc_dest = find_index(docs, doc_dest, 0, get_tam_vetor(docs));
 
             insere_grafo(*grafo, indx_doc_fonte, indx_doc_dest);
         }
-
-        //printf("\n"); // TESTE
-
     }
 
     fclose(graph);
@@ -125,7 +125,7 @@ void le_diretorio_pages(char *nome_diretorio, VetorStr *docs, TST **palavras_tst
         // guarda o nome da página atual
         snprintf(page_name, sizeof(page_name), "%s", entrada->d_name);
 
-        FILE *page = abre_arquivo("exemplo/pages", page_name);
+        FILE *page = abre_arquivo(pasta, page_name);
         le_pagina(page, page_name, docs, palavras_tst, stopwords_tst);
         fclose(page);
     }

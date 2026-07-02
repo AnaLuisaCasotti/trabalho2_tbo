@@ -35,11 +35,13 @@ double *calcula_pagerank(Graph *grafo){
                 pr[i] += ALFA * antigo_pr[i];
             }
             double sum = sum_page_rank(grafo, i, antigo_pr);
+            
             /*for(int j=0; j < num_paginas; j++){ 
                 if(tem_link_para_i(grafo, i, j)){
                     sum += antigo_pr[j] / out[j];
                 }
             }*/
+           
             sum *= ALFA;
             pr[i] += sum;
         }

@@ -1,7 +1,7 @@
 #include "lista_docs.h"
 
 struct DocNode {
-    int doc_id; // id do documento é a índice dele no vetor em que eles ficam guardados
+    int doc_id; // id do documento é o índice dele no vetor em que os nomes deles ficam guardados
     struct DocNode *prox;
 };
 
@@ -65,6 +65,7 @@ void print_doclist(DocList *l){
 
 DocList *encontra_intersecao(DocList *l1, DocList *l2) {
     DocList *intersecao = cria_doclist();
+
     if (intersecao == NULL) return NULL;
 
     if (l1 == NULL || l2 == NULL || l1->tamanho == 0 || l2->tamanho == 0) {
@@ -81,9 +82,11 @@ DocList *encontra_intersecao(DocList *l1, DocList *l2) {
             p1 = p1->prox;
             p2 = p2->prox;
         } 
+
         else if (p1->doc_id < p2->doc_id) {
             p1 = p1->prox;
-        } 
+        }
+
         else {
             p2 = p2->prox;
         }
@@ -97,6 +100,7 @@ DocList* clona_doclist(DocList *l) {
     if (nova == NULL || l == NULL) return nova;
 
     DocNode* atual = l->inicio;
+
     while (atual != NULL) {
         insere_doclist(nova, atual->doc_id); 
         atual = atual->prox;
@@ -106,6 +110,7 @@ DocList* clona_doclist(DocList *l) {
 
 void print_com_nomes(DocList *l, VetorStr *docs){
     DocNode *atual = l->inicio;
+
     while(atual != NULL){
       printf("%s", get_string_vetor(docs, atual->doc_id));
       if(atual->prox != NULL) printf(" ");
@@ -115,6 +120,7 @@ void print_com_nomes(DocList *l, VetorStr *docs){
 
 void print_com_pr(DocList *l, double *pr){
     DocNode *atual = l->inicio;
+
     while(atual != NULL){
       printf("%.17lf", pr[atual->doc_id]);
       if(atual->prox != NULL) printf(" ");
@@ -133,7 +139,8 @@ int compara_pr(const void *a, const void *b){
 
   if(aux1->pr > aux2->pr) return -1;
   if(aux1->pr < aux2->pr) return 1;
-  else return aux1->no->doc_id - aux2->no->doc_id;
+
+  else return (aux1->no->doc_id - aux2->no->doc_id);
 }
 
 void ordena_doclist(DocList *l, double *pr){
