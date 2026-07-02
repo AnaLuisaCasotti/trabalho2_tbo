@@ -70,5 +70,4 @@ double sum_page_rank(Graph *g, int i, double *antigo_pr);
  */
 void free_grafo(Graph *g);
 
-
 #endif
